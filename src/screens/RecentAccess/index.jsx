@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {FlatList, Text, View} from 'react-native';
+import {FlatList, RefreshControl, Text, View} from 'react-native';
 import { styles } from './styles'
 import {Image} from "native-base";
 import axios from "axios";
@@ -7,7 +7,6 @@ import axios from "axios";
 const months = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul","Ago","Set","Out","Nov","Dez"];
 
 const renderItem = (item) => {
-    console.log(item)
     const date = new Date(item.created_at);
     const formatedDate = (
         date.getDate() + " " + months[(date.getMonth())] + " " + date.getFullYear() + " - " +
@@ -36,15 +35,18 @@ const api = axios.create({
 
 export default function RecentAccessScreen({ navigation }) {
     const [logs, setLogs] = useState([])
+    const [refreshing, setRefreshing] = useState(true);
 
     useEffect(() => {
+        setRefreshing(true)
         api.get('logs')
             .then(({data}) => {
                 setLogs(data)
+                setRefreshing(false)
             })
     }, [])
 
-    console.log(logs)
+
     return (
         <View style={styles.content}>
             <View style={styles.container}>
@@ -53,6 +55,19 @@ export default function RecentAccessScreen({ navigation }) {
                     logs.length
                         ? <FlatList
                             data={logs}
+                            refreshControl={
+                                <RefreshControl
+                                    refreshing={refreshing}
+                                    onRefresh={() => {
+                                        setRefreshing(true)
+                                        api.get('logs')
+                                            .then(({data}) => {
+                                                setLogs(data)
+                                                setRefreshing(false)
+                                            })
+                                    }}
+                                />
+                            }
                             style={{ flex: 1 }}
                             renderItem={({item}) => renderItem(item)}
                             keyExtractor={item => item.id}
