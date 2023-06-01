@@ -7,11 +7,9 @@ import axios from "axios";
 const months = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul","Ago","Set","Out","Nov","Dez"];
 
 const renderItem = (item) => {
-    const date = new Date(item.created_at);
-    const formatedDate = (
-        date.getDate() + " " + months[(date.getMonth())] + " " + date.getFullYear() + " - " +
-        date.getHours() + ":" + date.getMinutes()
-    );
+    const date = new Date(item.created_at)
+    date.setHours(date.getHours() - 3)
+    const formatedDate = date.toLocaleString('pt-BR')
 
     return (
         <View style={styles.card}>
@@ -51,30 +49,25 @@ export default function RecentAccessScreen({ navigation }) {
         <View style={styles.content}>
             <View style={styles.container}>
                 <Text style={styles.title}>Acessos recentes</Text>
-                {
-                    logs.length
-                        ? <FlatList
-                            data={logs}
-                            refreshControl={
-                                <RefreshControl
-                                    refreshing={refreshing}
-                                    onRefresh={() => {
-                                        setRefreshing(true)
-                                        api.get('logs')
-                                            .then(({data}) => {
-                                                setLogs(data)
-                                                setRefreshing(false)
-                                            })
-                                    }}
-                                />
-                            }
-                            style={{ flex: 1 }}
-                            renderItem={({item}) => renderItem(item)}
-                            keyExtractor={item => item.id}
+                 <FlatList
+                    data={logs}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={refreshing}
+                            onRefresh={() => {
+                                setRefreshing(true)
+                                api.get('logs')
+                                    .then(({data}) => {
+                                        setLogs(data)
+                                        setRefreshing(false)
+                                    })
+                            }}
                         />
-                        : <Text style={styles.emptyAlert}>Você não possui nenhum acesso.</Text>
-                }
-
+                    }
+                    style={{ flex: 1 }}
+                    renderItem={({item}) => renderItem(item)}
+                    keyExtractor={item => item.id}
+                />
             </View>
         </View>
     )
