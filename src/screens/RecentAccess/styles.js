@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
     container: {
         marginTop: 100,
+        marginBottom: 24,
         marginLeft: 24,
         marginRight: 24,
         flex: 1,
@@ -21,7 +22,7 @@ export const styles = StyleSheet.create({
         fontSize: 36,
         fontWeight: 'bold',
         color: '#0C0F14',
-        marginBottom: 80
+        marginBottom: 48
     },
 
     card: {

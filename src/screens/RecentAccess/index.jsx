@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import {FlatList, RefreshControl, Text, View} from 'react-native';
 import { styles } from './styles'
-import {Image} from "native-base";
+import {Button, Image} from "native-base";
 import axios from "axios";
 
 const months = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul","Ago","Set","Out","Nov","Dez"];
@@ -68,6 +68,9 @@ export default function RecentAccessScreen({ navigation }) {
                     renderItem={({item}) => renderItem(item)}
                     keyExtractor={item => item.id}
                 />
+                <Button onPress={() => navigation.navigate('Create')} padding="3" style={{backgroundColor: '#0C0F14', marginTop: 24}} >
+                    <Text style={{color: '#FFF', fontWeight: 'bold'}}>Criar usuário</Text>
+                </Button>
             </View>
         </View>
     )
