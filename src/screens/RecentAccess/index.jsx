@@ -21,7 +21,19 @@ const renderItem = (item) => {
                 width: '100%'
             }}>
                 <Image alt={item.id} source={{ uri: item.image }} style={{ width: 60, height: 60, borderRadius: 99}}/>
-                <Text style={styles.cardDescription}>{formatedDate}</Text>
+                <View
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'flex-end'
+                    }}>
+                    <Text style={styles.cardUserName}>{item.user_name}</Text>
+                    <Text style={{
+                        fontSize: 16,
+                        color: item.allowed ? '#116A7B' : '#E97777'
+                    }}>{item.allowed ? 'Permitido': 'Negado'}</Text>
+                    <Text style={styles.cardDate}>{formatedDate}</Text>
+                </View>
             </View>
         </View>
     )}
@@ -46,6 +58,7 @@ export default function RecentAccessScreen({ navigation }) {
         <View style={styles.content}>
             <View style={styles.container}>
                 <Text style={styles.title}>Acessos recentes</Text>
+                {refreshing && <Text>Carregando...</Text>}
                  <FlatList
                     data={logs}
                     refreshControl={

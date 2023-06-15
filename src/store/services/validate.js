@@ -20,25 +20,17 @@ class AbstractHandler {
 
 class ValidateNameHandler extends AbstractHandler {
     async handle(request) {
-        if(!request.name) throw Error('Name Needed');
-        if(request.name.length > 30) throw Error('Name size exceeded - limit 30 characters');
+        if(!request.user_name) throw Error('Name Needed');
+        if(request.user_name.length > 30) throw Error('Name size exceeded - limit 30 characters');
 
         return super.handle(request);
 
-    }
-}
-
-class ValidateEmailHandler extends AbstractHandler {
-    async handle(request) {
-        if(!request.email) throw Error('Email Needed');
-
-        return super.handle(request);
     }
 }
 
 class ValidateImageHandler extends AbstractHandler {
     async handle(request)  {
-        if(!request.imageFile) throw Error('Image Needed');
+        if(!request.image) throw Error('Image Needed');
 
         return super.handle(request);
 
@@ -48,10 +40,9 @@ class ValidateImageHandler extends AbstractHandler {
 export class ValidadeAndSubmitFormChain {
     start (data) {
         const name = new ValidateNameHandler();
-        const email = new ValidateEmailHandler();
         const image = new ValidateImageHandler();
 
-        name.setNext(email).setNext(image)
+        name.setNext(image)
 
         return name.handle(data);
     }

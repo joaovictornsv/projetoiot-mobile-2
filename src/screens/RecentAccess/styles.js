@@ -4,9 +4,8 @@ export const styles = StyleSheet.create({
     container: {
         marginTop: 100,
         marginBottom: 24,
-        marginLeft: 24,
-        marginRight: 24,
         flex: 1,
+        width: '100%',
         flexDirection: "column",
         alignItems: "center"
     },
@@ -43,9 +42,14 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
 
-    cardDescription: {
+    cardDate: {
         color: '#969696',
-        fontSize: 22
+        fontSize: 16
+    },
+
+    cardUserName: {
+        color: '#0C0F14',
+        fontSize: 16
     },
 
     removeButtom: {
