@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import {FlatList, RefreshControl, Text, View} from 'react-native';
 import { styles } from './styles'
 import {Button, Image} from "native-base";
-import axios from "axios";
+import {api} from "../../utils/api";
 
 const months = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul","Ago","Set","Out","Nov","Dez"];
 
@@ -27,9 +27,6 @@ const renderItem = (item) => {
     )}
 ;
 
-const api = axios.create({
-    baseURL: "https://projetoiot-linux-function-app.azurewebsites.net/api",
-});
 
 export default function RecentAccessScreen({ navigation }) {
     const [logs, setLogs] = useState([])

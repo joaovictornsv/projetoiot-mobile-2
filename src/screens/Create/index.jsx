@@ -4,7 +4,6 @@ import { useForm, Controller } from 'react-hook-form';
 import { useState } from 'react';
 import * as ImagePicker from 'expo-image-picker';
 import { ValidadeAndSubmitFormChain } from '../../store/services/validate';
-import {FontAwesome5} from "@expo/vector-icons";
 
 
 export default function CreateScreen({ navigation }) {
@@ -141,20 +140,6 @@ export default function CreateScreen({ navigation }) {
                         <Button onPress={() => navigation.navigate('Access')} width='100%' style={{backgroundColor: '#0C0F14', marginTop: 24}} >
                             <Text style={{color: '#FFF', fontWeight: 'bold'}}>Voltar</Text>
                         </Button>
-                        {/*<TouchableOpacity*/}
-                        {/*    onPress={() =>*/}
-                        {/*        navigation.navigate('Create')*/}
-                        {/*    }*/}
-                        {/*    style={{*/}
-                        {/*        backgroundColor: '#0C0F14',*/}
-                        {/*        borderRadius: 8,*/}
-                        {/*        justifyContent: "center",*/}
-                        {/*        alignItems: "center",*/}
-                        {/*        margin: 28*/}
-                        {/*    }}*/}
-                        {/*>*/}
-                        {/*    <Text style={{ fontSize: 20, color: "#FFF" }}>Voltar</Text>*/}
-                        {/*</TouchableOpacity>*/}
                     </ScrollView>
 
                 </View>
