@@ -1,5 +1,5 @@
-import {View, Text, TouchableOpacity} from 'react-native';
-import { Button, Input,  Image, Spinner, Flex, ScrollView, useToast } from 'native-base';
+import {View, Text} from 'react-native';
+import { Button, Input,  Image, Flex, ScrollView, useToast } from 'native-base';
 import { useForm, Controller } from 'react-hook-form';
 import { useState } from 'react';
 import * as ImagePicker from 'expo-image-picker';
@@ -16,7 +16,7 @@ export default function CreateScreen({ navigation }) {
     const toastId = 'validate';
 
     const createData = new ValidadeAndSubmitFormChain();
-    const [showSucessMessage, setShowSuccessMessage] = useState(false)
+    const [showSuccessMessage, setShowSuccessMessage] = useState(false)
 
     const selectImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -24,7 +24,7 @@ export default function CreateScreen({ navigation }) {
             selectionLimit: 1,
             allowsEditing: true,
             aspect: [1, 1],
-            quality: 1,
+            quality: 0.2,
             base64: true,
         });
 
@@ -112,7 +112,7 @@ export default function CreateScreen({ navigation }) {
                         </Button>
 
                         {isLoading && <Text style={{ color: '#0C0F14', fontSize: 18 }}>Cadastrando...</Text>}
-                        {showSucessMessage && <Text style={{ color: 'green', fontSize: 18 }}>Usuário cadastrado!</Text>}
+                        {showSuccessMessage && <Text style={{ color: 'green', fontSize: 18 }}>Usuário cadastrado!</Text>}
                     </View>
                     <Button onPress={() => navigation.navigate('Access')} width='100%' style={{backgroundColor: '#0C0F14', marginTop: 24}} >
                         <Text style={{color: '#FFF', fontWeight: 'bold'}}>Voltar</Text>
